@@ -1,52 +1,49 @@
 /*
-
-File: MyWindowController.m
-
-Abstract: Source file for this sample's main NSWindowController.
-
-Version: 1.0
-
-Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
-Inc. ("Apple") in consideration of your agreement to the
-following terms, and your use, installation, modification or
-redistribution of this Apple software constitutes acceptance of these
-terms.  If you do not agree with these terms, please do not use,
-install, modify or redistribute this Apple software.
-
-In consideration of your agreement to abide by the following terms, and
-subject to these terms, Apple grants you a personal, non-exclusive
-license, under Apple's copyrights in this original Apple software (the
-"Apple Software"), to use, reproduce, modify and redistribute the Apple
-Software, with or without modifications, in source and/or binary forms;
-provided that if you redistribute the Apple Software in its entirety and
-without modifications, you must retain this notice and the following
-text and disclaimers in all such redistributions of the Apple Software. 
-Neither the name, trademarks, service marks or logos of Apple Inc.
-may be used to endorse or promote products derived from the Apple
-Software without specific prior written permission from Apple.  Except
-as expressly stated in this notice, no other rights or licenses, express
-or implied, are granted by Apple herein, including but not limited to
-any patent rights that may be infringed by your derivative works or by
-other works in which the Apple Software may be incorporated.
-
-The Apple Software is provided by Apple on an "AS IS" basis.  APPLE
-MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION
-THE IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS
-FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND
-OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.
-
-IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL
-OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION,
-MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED
-AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE),
-STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
-
-Copyright � 2007 Apple Inc. All Rights Reserved
-
-*/
+     File: MyWindowController.m 
+ Abstract: The primary NSWindowController object for managing all the buttons and controls. 
+  Version: 1.1 
+  
+ Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple 
+ Inc. ("Apple") in consideration of your agreement to the following 
+ terms, and your use, installation, modification or redistribution of 
+ this Apple software constitutes acceptance of these terms.  If you do 
+ not agree with these terms, please do not use, install, modify or 
+ redistribute this Apple software. 
+  
+ In consideration of your agreement to abide by the following terms, and 
+ subject to these terms, Apple grants you a personal, non-exclusive 
+ license, under Apple's copyrights in this original Apple software (the 
+ "Apple Software"), to use, reproduce, modify and redistribute the Apple 
+ Software, with or without modifications, in source and/or binary forms; 
+ provided that if you redistribute the Apple Software in its entirety and 
+ without modifications, you must retain this notice and the following 
+ text and disclaimers in all such redistributions of the Apple Software. 
+ Neither the name, trademarks, service marks or logos of Apple Inc. may 
+ be used to endorse or promote products derived from the Apple Software 
+ without specific prior written permission from Apple.  Except as 
+ expressly stated in this notice, no other rights or licenses, express or 
+ implied, are granted by Apple herein, including but not limited to any 
+ patent rights that may be infringed by your derivative works or by other 
+ works in which the Apple Software may be incorporated. 
+  
+ The Apple Software is provided by Apple on an "AS IS" basis.  APPLE 
+ MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION 
+ THE IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS 
+ FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND 
+ OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS. 
+  
+ IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL 
+ OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+ INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION, 
+ MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED 
+ AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE), 
+ STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE 
+ POSSIBILITY OF SUCH DAMAGE. 
+  
+ Copyright (C) 2010 Apple Inc. All Rights Reserved. 
+  
+ */ 
 
 #import "MyWindowController.h"
 
@@ -60,6 +57,9 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 @interface NSSegmentedControl (SampleAddition)
 - (void)unselectAllSegments;
 @end
+
+
+#pragma mark -
 
 @implementation NSSegmentedControl (SampleAddition)
 - (void)unselectAllSegments
@@ -80,12 +80,16 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 @end
 
 
+#pragma mark -
+
 @implementation MyWindowController
+
+@synthesize buttonMenu;
 
 // -------------------------------------------------------------------------------
 //	initWithPath:newPath
 // -------------------------------------------------------------------------------
-- initWithPath:(NSString *)newPath
+- (id)initWithPath:(NSString *)newPath
 {
     return [super initWithWindowNibName:@"TestWindow"];
 }
@@ -93,13 +97,14 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 // -------------------------------------------------------------------------------
 //	dealloc:
 // -------------------------------------------------------------------------------
--(void)dealloc
+- (void)dealloc
 {
 	[codeBasedPopUpDown release];
 	[codeBasedPopUpRight release];
 	[codeBasedButtonRound release];
 	[codeBasedButtonSquare release];
-	
+    [buttonMenu release];
+    
 	[super dealloc];
 }
 
@@ -112,24 +117,26 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 // -------------------------------------------------------------------------------
 - (void)awakeFromNib
 {
-	NSImage* iconImage = [NSImage imageNamed: @"moof"];
-	
-	// add an image to the first menu item
-	NSMenuItem* menuItem = [[NSMenuItem alloc] initWithTitle:@"" action:nil keyEquivalent:@""];
-	[menuItem setImage:iconImage];
-	[buttonMenu insertItem:menuItem atIndex:0];
-	[menuItem release];
+	NSImage* iconImage = [NSImage imageNamed:@"moof"];
 	
 	//===============================
 	// NSPopupButton
+
+	// update its menu (keep original self.buttonMenu untouched)
+	NSMenu *newMenu = [self.buttonMenu copy];
+	
+	// add the image menu item back to the first menu item
+	NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:@"" action:nil keyEquivalent:@""];
+	[menuItem setImage:[NSImage imageNamed: @"moof"]];
+	[newMenu insertItem:menuItem atIndex:0];
+	[menuItem release];
 
 	// create the pull down button pointing DOWN
 	NSRect buttonFrame = [placeHolder1 frame];
 	codeBasedPopUpDown = [[NSPopUpButton alloc] initWithFrame:buttonFrame pullsDown:YES];
 	[[codeBasedPopUpDown cell] setArrowPosition:NSPopUpArrowAtBottom];	
 	[[codeBasedPopUpDown cell] setBezelStyle:NSSmallIconButtonBezelStyle];
-	NSMenu* popupButton = [[buttonMenu copy] autorelease];	// copy the menu for this button
-	[codeBasedPopUpDown setMenu: popupButton];
+	[codeBasedPopUpDown setMenu:newMenu];
 	[popupBox addSubview:codeBasedPopUpDown];
 	[placeHolder1 removeFromSuperview];	// we are done with the place holder, remove it from the window
 	
@@ -139,15 +146,16 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 	[[codeBasedPopUpRight cell] setArrowPosition:NSPopUpArrowAtBottom];
 	[codeBasedPopUpRight setPreferredEdge:NSMaxXEdge];	// make the popup menu appear to the right
 	[[codeBasedPopUpRight cell] setBezelStyle: NSShadowlessSquareBezelStyle];
-	NSMenu* pullDownMenu = [[buttonMenu copy] autorelease];	// copy the menu for this button
-	[codeBasedPopUpRight setMenu: pullDownMenu];
+	[codeBasedPopUpRight setMenu:newMenu];
 	[[codeBasedPopUpRight cell] setHighlightsBy:NSChangeGrayCellMask];
 	[popupBox addSubview:codeBasedPopUpRight];
 	[placeHolder2 removeFromSuperview];	// we are done with the place holder, remove it from the window
 	
-	// copy the menu again for 'nibBasedPopUpRight' control
-	NSMenu* copiedMeu = [[buttonMenu copy] autorelease];
-	[nibBasedPopUpRight setMenu:copiedMeu];
+	// copy the menu again for 'nibBasedPopUpDown' and 'nibBasedPopUpRight' control
+	[nibBasedPopUpDown setMenu:newMenu];
+	[nibBasedPopUpRight setMenu:newMenu];
+    
+	[newMenu release];
 	
 	//===============================
 	// NSButton
@@ -177,8 +185,8 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 	buttonFrame = [placeHolder4 frame];
 	codeBasedButtonSquare = [[NSButton alloc] initWithFrame:buttonFrame];
 	[codeBasedButtonSquare setTitle: @"NSButton"];
-	[codeBasedButtonSquare setBezelStyle: NSShadowlessSquareBezelStyle];
-	[codeBasedButtonSquare setImagePosition: NSImageLeft];
+	[codeBasedButtonSquare setBezelStyle:NSShadowlessSquareBezelStyle];
+	[codeBasedButtonSquare setImagePosition:NSImageLeft];
 	[[codeBasedButtonSquare cell] setAlignment:NSLeftTextAlignment];
 	[codeBasedButtonSquare setImage:iconImage];
 	[codeBasedButtonSquare setFont:[NSFont systemFontOfSize:[NSFont smallSystemFontSize]]];
@@ -195,23 +203,20 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 	buttonFrame = [placeHolder5 frame];
 	codeBasedSegmentControl = [[NSSegmentedControl alloc] initWithFrame:buttonFrame];
 	[codeBasedSegmentControl setSegmentCount:3];
-	[codeBasedSegmentControl setWidth: [nibBasedSegControl widthForSegment:0] forSegment:0];
-	[codeBasedSegmentControl setWidth: [nibBasedSegControl widthForSegment:1] forSegment:1];
-	[codeBasedSegmentControl setWidth: [nibBasedSegControl widthForSegment:2] forSegment:2];
-	[codeBasedSegmentControl setLabel:@"One" forSegment: 0];
-	[codeBasedSegmentControl setLabel:@"Two" forSegment: 1];
-	[codeBasedSegmentControl setLabel:@"Three" forSegment: 2];
+	[codeBasedSegmentControl setWidth:[nibBasedSegControl widthForSegment:0] forSegment:0];
+	[codeBasedSegmentControl setWidth:[nibBasedSegControl widthForSegment:1] forSegment:1];
+	[codeBasedSegmentControl setWidth:[nibBasedSegControl widthForSegment:2] forSegment:2];
+	[codeBasedSegmentControl setLabel:@"One" forSegment:0];
+	[codeBasedSegmentControl setLabel:@"Two" forSegment:1];
+	[codeBasedSegmentControl setLabel:@"Three" forSegment:2];
 	[codeBasedSegmentControl setTarget:self];
 	[codeBasedSegmentControl setAction:@selector(segmentAction:)];
 	[segmentBox addSubview:codeBasedSegmentControl];
 	[placeHolder5 removeFromSuperview];	// we are done with the place holder, remove it from the window
 	
 	// use a menu to the first segment (applied to both nib-based and code-based)
-	NSMenu* codeBasedSegmentMenu = [[buttonMenu copy] autorelease];	// copy the menu for the segmented control
-	[codeBasedSegmentControl setMenu:codeBasedSegmentMenu forSegment: 0];
-	
-	NSMenu* nibBasedSegmentMenu = [[buttonMenu copy] autorelease];
-	[nibBasedSegControl setMenu:nibBasedSegmentMenu forSegment: 0];
+	[codeBasedSegmentControl setMenu:self.buttonMenu forSegment:0];
+	[nibBasedSegControl setMenu:self.buttonMenu forSegment:0];
 	
 	// add icons to each segment (applied to both nib-based and code-based)
 	iconImage = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kComputerIcon)];
@@ -231,7 +236,7 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 	// NSMatrix
 	
 	// first create a radio cell prototype
-	NSButtonCell* radioCell; 
+	NSButtonCell *radioCell; 
 	radioCell = [[[NSButtonCell alloc] init] autorelease]; 
 	[radioCell setButtonType:NSRadioButton]; 
 	[radioCell setTitle:@"RadioCell"];
@@ -241,7 +246,7 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 	codeBasedMatrix = [[NSMatrix alloc] initWithFrame:buttonFrame mode:NSRadioModeMatrix prototype:radioCell numberOfRows:2 numberOfColumns:1];
 	
 	// add the cells to the matrix
-	NSCell* cellToChange = [codeBasedMatrix cellAtRow:0 column:0];
+	NSCell *cellToChange = [codeBasedMatrix cellAtRow:0 column:0];
 	[cellToChange setTitle:@"Radio 1"];
 	cellToChange = [codeBasedMatrix cellAtRow:1 column:0];
 	[cellToChange setTitle:@"Radio 2"];
@@ -281,6 +286,7 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 }
 
 
+#pragma mark -
 #pragma mark NSPopUpButton
 
 // -------------------------------------------------------------------------------
@@ -289,7 +295,7 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 //	User chose a menu item from one of the popups.
 //	Note that all four popup buttons share the same action method.
 // -------------------------------------------------------------------------------
--(IBAction)popupAction:(id)sender
+- (IBAction)popupAction:(id)sender
 {
 	NSLog(@"Menu item: %ld", [sender tag]);
 }
@@ -299,7 +305,7 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 //
 //	Change the given NSPopupButton as "popup" or "pull down" styte.
 // -------------------------------------------------------------------------------
--(void)changePopupState:(NSPopUpButton*)popup asPullDown:(BOOL)pullDown
+- (void)changePopupState:(NSPopUpButton *)popup asPullDown:(BOOL)pullDown
 {
 	// hide button first to invalidate its old size
 	[popup setHidden:YES];
@@ -315,11 +321,17 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 		buttonFrame.size.height += 36;		
 		buttonFrame.origin.y -= 36;
 		
+		// update its menu (keep original self.buttonMenu untouched)
+		NSMenu *newMenu = [self.buttonMenu copy];
+		
 		// add the image menu item back to the first menu item
-		NSMenuItem* menuItem = [[NSMenuItem alloc] initWithTitle:@"" action:nil keyEquivalent:@""];
+		NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:@"" action:nil keyEquivalent:@""];
 		[menuItem setImage:[NSImage imageNamed: @"moof"]];
-		[[popup menu] insertItem:menuItem atIndex:0];
+		[newMenu insertItem:menuItem atIndex:0];
 		[menuItem release];
+		
+		[popup setMenu:newMenu];
+		[newMenu release];
 	}
 	else
 	{
@@ -329,9 +341,10 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 		buttonFrame.size.height -= 36;	
 		buttonFrame.origin.y += 36;
 		
-		// remove the moof image menu item
-		[[popup menu] removeItemAtIndex:0];
-		[popup selectItemAtIndex:0];
+		// update its menu (keep original self.buttonMenu untouched)
+		NSMenu *newMenu = [self.buttonMenu copy];
+		[popup setMenu:self.buttonMenu];
+		[newMenu release];
 	}	
 	
 	[[popup cell] setPullsDown:pullDown];
@@ -358,7 +371,7 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 //		Put back the moof image menu item.
 //	
 // -------------------------------------------------------------------------------
--(IBAction)pullsDownAction:(id)sender
+- (IBAction)pullsDownAction:(id)sender
 {
 	BOOL pullDown = [[sender selectedCell] state];
 	
@@ -370,12 +383,13 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 }
 
 
+#pragma mark -
 #pragma mark NSButton
 
 // -------------------------------------------------------------------------------
 //	setIconPosition:useIcon
 // -------------------------------------------------------------------------------
--(void)setIconPosition:(NSButton*)button useIcon:(BOOL)useIcon
+- (void)setIconPosition:(NSButton*)button useIcon:(BOOL)useIcon
 {
 	if (useIcon)
 	{
@@ -394,7 +408,7 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 //
 //	User checked "Use Icon" checkbox - add or remove the moof icon.
 // -------------------------------------------------------------------------------
--(IBAction)useIconAction:(id)sender
+- (IBAction)useIconAction:(id)sender
 {
 	BOOL useIcon = [[sender cell] state];
 	
@@ -410,12 +424,13 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 //	User clicked one of the NSButttons.
 //	Note that all four buttons share the same action method.
 // -------------------------------------------------------------------------------
--(IBAction)buttonAction:(id)sender
+- (IBAction)buttonAction:(id)sender
 {
 	NSLog(@"Button was clicked");
 }
 
 
+#pragma mark -
 #pragma mark NSSegmentedControl
 
 // -------------------------------------------------------------------------------
@@ -424,7 +439,7 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 //	User clicked one of the segments.
 //	Note that both segmented controls share the same action method.
 // -------------------------------------------------------------------------------
--(IBAction)segmentAction:(id)sender
+- (IBAction)segmentAction:(id)sender
 {
 	NSLog(@"Segment control was clicked: segment %ld", [sender selectedSegment]);
 }
@@ -435,13 +450,14 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 //	User clicked on the button to unselect all segments.
 //	Use our category to NSSegmentedControl to unselect the cells.
 // -------------------------------------------------------------------------------
--(IBAction)unselectAction:(id)sender
+- (IBAction)unselectAction:(id)sender
 {
 	[nibBasedSegControl unselectAllSegments];
 	[codeBasedSegmentControl unselectAllSegments];
 }
 
 
+#pragma mark -
 #pragma mark NSMatrix
 
 // -------------------------------------------------------------------------------
@@ -449,12 +465,13 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 //
 //	User clicked one of the radio buttons in the NSMatrix.
 // -------------------------------------------------------------------------------
--(IBAction)matrixAction:(id)sender
+- (IBAction)matrixAction:(id)sender
 {
 	NSLog(@"NSMatrix was clicked: radio control %ld", [sender selectedRow]);
 }
 
 
+#pragma mark -
 #pragma mark NSColorWell
 
 // -------------------------------------------------------------------------------
@@ -462,12 +479,13 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 //
 //	User clicked one of the NSColorWell.
 // -------------------------------------------------------------------------------
--(IBAction)colorAction:(id)sender
+- (IBAction)colorAction:(id)sender
 {
 	NSLog(@"User chose a color: %@", [sender color]);
 }
 
 
+#pragma mark -
 #pragma mark NSLevelIndicator
 
 // -------------------------------------------------------------------------------
@@ -475,7 +493,7 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 //
 //	User clicked the up/down arrow to adjust the level.
 // -------------------------------------------------------------------------------
--(IBAction)levelAdjustAction:(id)sender
+- (IBAction)levelAdjustAction:(id)sender
 {
 	NSLog(@"Change level: %ld", [sender intValue]);
 	[nibBasedIndicator setIntValue: [sender intValue]];
@@ -487,7 +505,7 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 //
 //	User clicked on the actual level indicator to change its value.
 // -------------------------------------------------------------------------------
--(IBAction)levelAction:(id)sender
+- (IBAction)levelAction:(id)sender
 {
 	NSLog(@"Level clicked: %ld", [sender intValue]);
 }
@@ -497,7 +515,7 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 //
 //	User wants to change the level indicator's style.
 // -------------------------------------------------------------------------------
--(IBAction)setStyleAction:(id)sender
+- (IBAction)setStyleAction:(id)sender
 {
 	int tag = [[sender selectedCell] tag];
 	[[nibBasedIndicator cell] setLevelIndicatorStyle: tag];
@@ -505,6 +523,7 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 }
 
 
+#pragma mark -
 #pragma mark DropDownButton
 
 // -------------------------------------------------------------------------------
@@ -512,7 +531,7 @@ Copyright � 2007 Apple Inc. All Rights Reserved
 //
 //	User clicked the DropDownButton.
 // -------------------------------------------------------------------------------
--(IBAction)dropDownAction:(id)sender
+- (IBAction)dropDownAction:(id)sender
 {
 	NSLog(@"Drop down button clicked");
 }

@@ -10,9 +10,9 @@
 		53085FAB0AC3067700DBC9C6 /* TestWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 53085FA90AC3067700DBC9C6 /* TestWindow.nib */; };
 		530A0F160C1EF2EF002EFE21 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 530A0F140C1EF2EF002EFE21 /* Credits.rtf */; };
 		533DAFB70C03737C003C54CE /* moof2.png in Resources */ = {isa = PBXBuildFile; fileRef = 533DAFB60C03737C003C54CE /* moof2.png */; };
+		535D2A01114AED8900B4582A /* ReadMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = 535D2A00114AED8900B4582A /* ReadMe.txt */; };
 		53CC47720ABB251700F70973 /* MyWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53CC47700ABB251700F70973 /* MyWindowController.m */; };
 		53DB3CD00AD6F948003EECBD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 53DB3CCF0AD6F948003EECBD /* AppDelegate.m */; };
-		53FB51EB0C1DFF3000650932 /* ReadMe.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 53FB51EA0C1DFF3000650932 /* ReadMe.rtf */; };
 		74B564A40B9E18F70037D4FF /* DropDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 74B564A30B9E18F70037D4FF /* DropDownButton.m */; };
 		74B564B10B9E1A410037D4FF /* moof.png in Resources */ = {isa = PBXBuildFile; fileRef = 74B564B00B9E1A410037D4FF /* moof.png */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
@@ -31,12 +31,12 @@
 		53085FAA0AC3067700DBC9C6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/TestWindow.nib; sourceTree = "<group>"; };
 		530A0F150C1EF2EF002EFE21 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		533DAFB60C03737C003C54CE /* moof2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moof2.png; sourceTree = "<group>"; };
+		535D2A00114AED8900B4582A /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
 		53CC47700ABB251700F70973 /* MyWindowController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MyWindowController.m; sourceTree = "<group>"; };
 		53CC47710ABB251700F70973 /* MyWindowController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MyWindowController.h; sourceTree = "<group>"; };
 		53DB3CCE0AD6F948003EECBD /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		53DB3CCF0AD6F948003EECBD /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		53E5B1B10B6021EF0087DD13 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
-		53FB51EA0C1DFF3000650932 /* ReadMe.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = ReadMe.rtf; sourceTree = "<group>"; };
 		74B564A20B9E18F70037D4FF /* DropDownButton.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = DropDownButton.h; sourceTree = "<group>"; };
 		74B564A30B9E18F70037D4FF /* DropDownButton.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = DropDownButton.m; sourceTree = "<group>"; };
 		74B564B00B9E1A410037D4FF /* moof.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moof.png; sourceTree = "<group>"; };
@@ -95,14 +95,14 @@
 		29B97315FDCFA39411CA2CEA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				74B564A20B9E18F70037D4FF /* DropDownButton.h */,
-				74B564A30B9E18F70037D4FF /* DropDownButton.m */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				53E5B1B10B6021EF0087DD13 /* Prefix.pch */,
-				53CC47700ABB251700F70973 /* MyWindowController.m */,
-				53CC47710ABB251700F70973 /* MyWindowController.h */,
 				53DB3CCE0AD6F948003EECBD /* AppDelegate.h */,
 				53DB3CCF0AD6F948003EECBD /* AppDelegate.m */,
+				53CC47710ABB251700F70973 /* MyWindowController.h */,
+				53CC47700ABB251700F70973 /* MyWindowController.m */,
+				74B564A20B9E18F70037D4FF /* DropDownButton.h */,
+				74B564A30B9E18F70037D4FF /* DropDownButton.m */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -110,8 +110,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				535D2A00114AED8900B4582A /* ReadMe.txt */,
 				530A0F140C1EF2EF002EFE21 /* Credits.rtf */,
-				53FB51EA0C1DFF3000650932 /* ReadMe.rtf */,
 				533DAFB60C03737C003C54CE /* moof2.png */,
 				74B564B00B9E1A410037D4FF /* moof.png */,
 				53085FA90AC3067700DBC9C6 /* TestWindow.nib */,
@@ -159,7 +159,14 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ButtonMadness" */;
 			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* TrackIt */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -179,8 +186,8 @@
 				53085FAB0AC3067700DBC9C6 /* TestWindow.nib in Resources */,
 				74B564B10B9E1A410037D4FF /* moof.png in Resources */,
 				533DAFB70C03737C003C54CE /* moof2.png in Resources */,
-				53FB51EB0C1DFF3000650932 /* ReadMe.rtf in Resources */,
 				530A0F160C1EF2EF002EFE21 /* Credits.rtf in Resources */,
+				535D2A01114AED8900B4582A /* ReadMe.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +246,8 @@
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -257,10 +266,8 @@
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
@@ -275,20 +282,26 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 			};
 			name = Release;
 		};
