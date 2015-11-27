@@ -1,7 +1,7 @@
 /*
      File: MyWindowController.m 
  Abstract: The primary NSWindowController object for managing all the buttons and controls. 
-  Version: 1.1 
+  Version: 1.2 
   
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple 
  Inc. ("Apple") in consideration of your agreement to the following 
@@ -41,7 +41,7 @@
  STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE 
  POSSIBILITY OF SUCH DAMAGE. 
   
- Copyright (C) 2010 Apple Inc. All Rights Reserved. 
+ Copyright (C) 2012 Apple Inc. All Rights Reserved. 
   
  */ 
 
@@ -119,6 +119,9 @@
 {
 	NSImage* iconImage = [NSImage imageNamed:@"moof"];
 	
+    [nibBasedButtonRound setImage:iconImage];
+    [nibBasedButtonSquare setImage:iconImage];
+    
 	//===============================
 	// NSPopupButton
 
@@ -297,7 +300,7 @@
 // -------------------------------------------------------------------------------
 - (IBAction)popupAction:(id)sender
 {
-	NSLog(@"Menu item: %ld", [sender tag]);
+	// menu item chosen: [sender tag];
 }
 
 // -------------------------------------------------------------------------------
@@ -441,7 +444,7 @@
 // -------------------------------------------------------------------------------
 - (IBAction)segmentAction:(id)sender
 {
-	NSLog(@"Segment control was clicked: segment %ld", [sender selectedSegment]);
+	// segment control was clicked: [sender selectedSegment];
 }
 
 // -------------------------------------------------------------------------------
@@ -467,7 +470,7 @@
 // -------------------------------------------------------------------------------
 - (IBAction)matrixAction:(id)sender
 {
-	NSLog(@"NSMatrix was clicked: radio control %ld", [sender selectedRow]);
+	// NSMatrix was clicked, radio control: [sender selectedRow];
 }
 
 
@@ -481,7 +484,7 @@
 // -------------------------------------------------------------------------------
 - (IBAction)colorAction:(id)sender
 {
-	NSLog(@"User chose a color: %@", [sender color]);
+	// user chose a color: [sender color];
 }
 
 
@@ -495,7 +498,7 @@
 // -------------------------------------------------------------------------------
 - (IBAction)levelAdjustAction:(id)sender
 {
-	NSLog(@"Change level: %ld", [sender intValue]);
+	// change level
 	[nibBasedIndicator setIntValue: [sender intValue]];
 	[codeBasedIndicator setIntValue: [sender intValue]];
 }
@@ -507,7 +510,7 @@
 // -------------------------------------------------------------------------------
 - (IBAction)levelAction:(id)sender
 {
-	NSLog(@"Level clicked: %ld", [sender intValue]);
+	// level clicked: [sender intValue];
 }
 
 // -------------------------------------------------------------------------------
@@ -533,7 +536,7 @@
 // -------------------------------------------------------------------------------
 - (IBAction)dropDownAction:(id)sender
 {
-	NSLog(@"Drop down button clicked");
+	// Drop down button clicked
 }
 
 @end
